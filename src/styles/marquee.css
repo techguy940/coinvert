@@ -1,0 +1,10 @@
+.marquee
+{
+    display: flex;
+    gap: 3rem;
+}
+
+.marquee .country-marquee:last-child
+{
+    margin-right: 3rem;
+}

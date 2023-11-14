@@ -1,0 +1,15 @@
+footer
+{
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.25rem;
+    background-color: var(--primary-color);
+    margin-top: 3rem;
+}
+
+footer p
+{
+    color: white;
+}

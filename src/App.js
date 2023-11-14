@@ -1,13 +1,16 @@
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar.js';
 import Homepage from './components/Homepage.js';
 import Features from './components/Features.js';
-import ReactCountryFlag from "react-country-flag";
+import Contactus from './components/Contactus.js';
+import Footer from './components/Footer.js';
+import MarqueeCon from './components/MarqueeCon.js';
+import News from './components/News.js';
+import Convert from './components/Convert.js';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Feature from './components/Feature.js';
 
 function App() {
   return (
@@ -16,10 +19,15 @@ function App() {
         <Route index element={
           <div>
             <Navbar />
+            <MarqueeCon />
             <Homepage />
             <Features />
+            <Contactus />
+            <Footer />
           </div>
         } />
+        <Route path="/news" element={<News />} />
+        <Route path="/convert" element={<Convert />} />
       </Routes>
     </BrowserRouter>
   );

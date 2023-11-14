@@ -1,0 +1,33 @@
+.country-marquee
+{
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    padding: 0.5rem;
+    box-shadow: 0 0 1px 0 rgba(0,0,0,0.75);
+    border-radius: 5px;
+}
+
+.country-marquee .country-title
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.country-marquee .country-title img:nth-child(2)
+{
+    position: relative;
+    right: 5px;
+}
+
+.country-marquee .country-title p
+{
+    font-size: 14px;
+}
+
+.country-marquee .country-rate
+{
+    font-weight: 600;
+}

@@ -1,0 +1,82 @@
+.convert-main
+{
+    display: flex;
+    flex-direction: column;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+}
+
+.convert-title
+{
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.convert-title h1
+{
+    color: var(--primary-color);
+    text-transform: uppercase;
+}
+
+.convert-inputs
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.convert-input
+{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.convert-input .convert-origin
+{
+    font-size: 12px;
+    font-weight: 600;
+    color: gray;
+}
+
+.convert-input .selected
+{
+    color: white;
+}
+
+.convert-exchange
+{
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.convert-exchange img
+{
+    width: 32px;
+    height: 30px;
+}
+
+.convert-exchange.rotate
+{
+    animation: rotatefull 0.2s linear;
+}
+
+@keyframes rotatefull {
+    100% {
+        transform: rotate(180deg);
+    }
+}
