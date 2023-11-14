@@ -84,9 +84,10 @@
 .convert-currency-inputs
 {
     display: flex;
+    margin-top: 1rem;
     justify-content: center;
     align-items: center;
-    gap: 7rem;
+    gap: 3.2rem;
 }
 
 .convert-currency-inputs .convert-currency-input input::placeholder
@@ -99,7 +100,7 @@
     border: none;
     outline: none;
     border-bottom: 1px solid rgba(127, 127, 127, 0.3);
-    width: 26rem;
+    width: 27rem;
     font-size: 40px;
     height: 10rem;
     padding-left: 0.25rem;
@@ -127,4 +128,18 @@
 .convert-graph
 {
     margin-top: 2rem;
+}
+
+.convert-favourite
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.8rem;
+    cursor: pointer;
+}
+
+.convert-mobile .convert-favourite
+{
+    display: none;
 }
