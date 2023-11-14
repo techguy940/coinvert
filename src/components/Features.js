@@ -14,7 +14,7 @@ function Features(){
         <div className="features-sec">
           <Feature image={currencies} title="Currencies" description="Coinvert supports exchange between a wide range of currencies" />
           <Feature image={realtime} title="Realtime" description="Get up-to-date exchange rates for every currencies, updated every 60 minutes" />
-          <Feature image={graph} title="Charts" description="View live charts for currency exchange for several time-frames" />
+          <Feature image={graph} title="Charts" description="View historic charts for exchange rates of multiple currencies" />
           <Feature image={news} title="News" description="Stay up-to-date by reading latest and updated news related to exchange market" />          
         </div>
       </div>

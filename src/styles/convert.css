@@ -80,3 +80,51 @@
         transform: rotate(180deg);
     }
 }
+
+.convert-currency-inputs
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7rem;
+}
+
+.convert-currency-inputs .convert-currency-input input::placeholder
+{
+    color: gray;
+}
+
+.convert-currency-inputs .convert-currency-input input
+{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(127, 127, 127, 0.3);
+    width: 26rem;
+    font-size: 40px;
+    height: 10rem;
+    padding-left: 0.25rem;
+    padding-right: 1rem;
+}
+
+.convert-currency-inputs .convert-currency-input input::-webkit-outer-spin-button,
+.convert-currency-inputs .convert-currency-input input::-webkit-inner-spin-button
+{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.convert-currency-inputs .convert-currency-input input:disabled
+{
+    background-color: white;
+}
+
+.convert-currency-inputs .convert-currency-input input:focus
+{
+    border-bottom: 1px solid rgba(127, 127, 127, 0.7);
+    transition: 150ms ease-in-out;
+}
+
+.convert-graph
+{
+    margin-top: 2rem;
+}
