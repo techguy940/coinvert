@@ -1,0 +1,113 @@
+header
+{
+    display: flex;
+    background-color: var(--primary-color);
+    justify-content: space-between;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: white;
+}
+
+header h1
+{
+    text-transform: uppercase;
+}
+
+header ul
+{
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+header ul li
+{
+    display: inline-block;
+    cursor: pointer;
+    list-style: none;
+}
+
+header ul li a
+{
+    text-decoration: none;
+    color: white;
+}
+
+header ul li a:hover
+{
+    color: #a1a1a1;
+    transition: 150ms ease-in-out;
+}
+
+.nav-menu-wrapper
+{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding-right: 1rem;
+    cursor: pointer;
+}
+
+@media (max-width: 640px)
+{
+    #nav-menu
+    {
+        display: flex;
+    }
+
+    header
+    {
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    header h1
+    {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        font-size: 1.5rem;
+    }
+
+    header ul
+    {
+        position: absolute;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 1rem;
+        background-color: var(--primary-color);
+        width: 100%;
+        top: 4rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: padding 0.5s ease-in-out;
+        transition: max-height 0s ease-in-out;
+    }
+
+    header ul.active
+    {
+        padding-left: 1.25rem;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        top: 4rem;
+        max-height: 100rem;
+        transition: max-height 0.5s ease-in-out;
+        transition: padding 0.5s ease-in-out;
+    }
+
+    header ul li a
+    {
+        text-transform: uppercase;
+    }
+
+    .nav-menu-wrapper
+    {
+        display: flex;
+    }
+
+}

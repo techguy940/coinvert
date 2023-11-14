@@ -1,0 +1,115 @@
+.home-details-wrapper
+{
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 10rem;
+    padding-right: 10rem;
+}
+
+.home-details-wrapper img
+{
+    width: 375px;
+    height: 375px;
+}
+
+.home-details
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 75vh;
+}
+
+.home-details h1
+{
+    color: var(--primary-color);
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.home-details p
+{
+    font-size: 1.25rem;
+}
+
+.home-details .home-btns
+{
+    margin-top: 1rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.home-details .home-btns button
+{
+    outline: none;
+    border: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.home-details .home-btns #features-btn
+{
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.home-details .home-btns #convert-btn
+{
+    color: var(--primary-color);
+}
+
+.home-details .home-btns #features-btn:hover
+{
+    background-color: var(--secondary-color);
+    transition: 150ms ease-in-out;
+}
+
+.home-details .home-btns #convert-btn:hover
+{
+    background-color: rgb(201, 201, 201);
+    transition: 150ms ease-in-out;
+}
+
+@media (max-width: 1140px)
+{
+    .home-details-wrapper
+    {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+}
+
+@media (max-width: 715px)
+{
+    .home-details-wrapper img
+    {
+        display: none;
+    }
+
+    .home-details-wrapper
+    {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 680px)
+{
+    .home-details
+    {
+        height: 60vh;
+    }
+    .home-details .home-btns
+    {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+}
