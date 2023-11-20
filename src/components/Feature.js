@@ -1,3 +1,4 @@
+// Component to show individual feature containing a relevant image, title and its description
 function Feature(props){
     return (
         <div className="feature">

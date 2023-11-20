@@ -1,3 +1,4 @@
+// Convert a string to formatted date (2023-01-01T00:00:00Z -> 1 Jan 2023 at 00:00 AM)
 function parseDateAndFormat(string){
     const date = new Date(Date.parse(string));
     const hours = date.getHours();

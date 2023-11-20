@@ -13,6 +13,7 @@
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
 }
 
@@ -125,9 +126,17 @@
     transition: 150ms ease-in-out;
 }
 
+.convert-graph-wrapper
+{
+    display: flex;
+    justify-content: center;
+}
+
 .convert-graph
 {
-    margin-top: 2rem;
+    margin-top: 3rem;
+    width: 700px;
+    max-width: 700px;
 }
 
 .convert-favourite
@@ -142,4 +151,126 @@
 .convert-mobile .convert-favourite
 {
     display: none;
+}
+
+@media (max-width: 1130px)
+{
+    .convert-currency-inputs .convert-currency-input input
+    {
+        width: 24rem;
+    }
+
+}
+
+@media (max-width: 970px)
+{
+    .convert-currency-inputs .convert-currency-input input
+    {
+        width: 20rem;
+    }
+}
+
+@media (max-width: 860px)
+{
+    .convert-currency-inputs .convert-currency-input input
+    {
+        width: 17rem;
+    }
+}
+
+@media (max-width: 760px)
+{
+    .convert-currency-inputs .convert-currency-input input
+    {
+        width: 14rem;
+    }
+}
+
+@media (max-width: 670px)
+{
+    .convert-inputs
+    {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .convert-exchange
+    {
+        transform: rotate(-90deg);
+    }
+
+    .convert-favourite.main
+    {
+        display: none;
+    }
+
+    .convert-mobile
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .convert-mobile .convert-favourite
+    {
+        display: block;
+    }
+
+    .convert-mobile img
+    {
+        width: 30px;
+        height: 30px;
+    }
+
+    .convert-currency-inputs
+    {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .convert-currency-inputs .convert-currency-input input
+    {
+        height: 5rem;
+        font-size: 30px;
+        width: 100%;
+    }
+}
+
+@media (max-width: 540px)
+{
+    .convert-mobile
+    {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .convert-main
+    {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .convert-inputs
+    {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .convert-input
+    {
+        width: 100%;
+    }
+
+    .convert-currency-inputs
+    {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .convert-title h1
+    {
+        font-size: 1.5rem;
+    }
 }

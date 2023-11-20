@@ -1,6 +1,7 @@
 import ReactCountryFlag from "react-country-flag";
 import '../styles/country-marquee.css';
 
+// Component to show current exchange rates between two currencies (ex. USD/INR) along with their flags overlapped
 function CountryMarquee(props){
     return (
         <div className="country-marquee">

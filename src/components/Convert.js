@@ -11,14 +11,14 @@ import recent from '../assets/recent.png';
 import heart from '../assets/heart.png';
 import heartFilled from '../assets/heart-filled.png';
 
+// initialise canvasjs
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-
+// all supported currencies with their flags and name
 const currencies = [{"text": "USD", "value": "USD", "currencyName": "US Dollar", "icon": <ReactCountryFlag svg countryCode="US" />}, {"text": "INR", "value": "INR", "currencyName": "Indian Rupee", "icon": <ReactCountryFlag svg countryCode="IN" />}]
 
-const history = [{"text": "USD/INR", "value": "USD/INR", "from": "USD", "to": "INR", "currencyName": "USD/INR"}]
-
+// group styles for group labels 'History', 'Favourites' and 'Currencies' in select
 const groupBadgeStyles = {
     backgroundColor: '#EBECF0',
     borderRadius: '2em',
@@ -30,37 +30,57 @@ const groupBadgeStyles = {
     minWidth: 1,
     padding: '0.16666666666667em 0.5em',
     textAlign: 'center',
-  };
+};
 
-  const groupStyles = {
+const groupStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-  };
-  
-  const formatGroupLabel = (data) => (
-    <div style={groupStyles}>
-      <span>{data.label}</span>
-      <span style={data.label === "History" || data.label === "Favourites" ? {} : groupBadgeStyles}>{data.label === "History" ? <img src={recent} width="15" height="15" /> : data.label === "Favourites" ? <img src={heartFilled} width="15" height="15" /> :data.options.length}</span>
-    </div>
-  );
+};
 
+// function to return a styled component for group labels for select
+const formatGroupLabel = (data) => (
+    <div style={groupStyles}>
+        <span>{data.label}</span>
+        <span style={data.label === "History" || data.label === "Favourites" ? {} : groupBadgeStyles}>{data.label === "History" ? <img src={recent} width="15" height="15" /> : data.label === "Favourites" ? <img src={heartFilled} width="15" height="15" /> :data.options.length}</span>
+    </div>
+);
+
+// Main component for converting currencies
 function Convert(){
+    // APIs and KEYs for current rate and historical rates
     const API_KEY = "";
     const BASE = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair`;
     const HISTORIC_API_KEY = "";
     const HISTORIC_BASE = "https://api.forexrateapi.com/v1/timeframe";
+
+    // currency1, currency2 keeps track of which currencies are selected to exchange
     const [currency1, setCurrency1] = useState(null)
     const [currency2, setCurrency2] = useState(null)
+
+    // fromCurrency, toCurrency keeps the amount of currency1, currency2 to be exchanged respectively
     const [fromCurrency, setFromCurrency] = useState("")
     const [toCurrency, setToCurrency] = useState("")
+
+    // dataPoints holds the historical data points for graph
     const [dataPoints, setDataPoints] = useState([])
+
+    // graphReady tells if the data is fetched and ready to be served
     const [graphReady, setGraphReady] = useState(false)
+
+    // favouriteStatus is a boolean representing if the currency pair is favourited by user or not
     const [favouriteStatus, setFavouriteStatus] = useState(false)
+
+    // historyData is array of 5 recently converted currency pair by the user
     const [historyData, setHistoryData] = useState(null)
+
+    // favouriteData is array of favourited currency pairs by the user
     const [favouriteData, setFavouriteData] = useState(null)
+
+    // classname of a component to animate it
     const [exchangeClass, setExchangeClass] = useState("convert-exchange")
 
+    // returns a boolean showing if the passed currency pair is favourite by user or not
     const getFavouriteStatus = (cur1, cur2) => {
         if (localStorage.getItem("favourites") === null){
             return false
@@ -70,6 +90,7 @@ function Convert(){
         return isFav === 1
     }
 
+    // add/remove favourite currency pair to localStorage
     const addFavourite = () => {
         if (favouriteStatus === true){
             const favourites = JSON.parse(localStorage.getItem("favourites"))
@@ -94,7 +115,9 @@ function Convert(){
         }
     }
     
+    // handles the change in input of selecting currency1
     const handleChange1 = (e) => {
+        // if the selected item is favourite/history
         if ("from" in e){
             setCurrency1(currencies.filter(curr => curr.value === e.from)[0])
             setCurrency2(currencies.filter(curr => curr.value === e.to)[0])
@@ -103,8 +126,10 @@ function Convert(){
         }
         setCurrency1(e)
     }
-
+    
+    // handles the change in input of selecting currency2
     const handleChange2 = (e) => {
+        // if the selected item is favourite/history
         if ("from" in e){
             setCurrency1(currencies.filter(curr => curr.value === e.from)[0])
             setCurrency2(currencies.filter(curr => curr.value === e.to)[0])
@@ -114,6 +139,7 @@ function Convert(){
         setCurrency2(e)
     }
 
+    // animates the exchange icon when clicked
     const animateAndExchangeCurrencies = () => {
         setExchangeClass("convert-exchange rotate")
 
@@ -123,10 +149,12 @@ function Convert(){
         }, 200)
     }
 
+    // exchanges currencies (cur1 -> cur2, cur1 -> cur2, fromCurrency -> toCurrency, toCurrency -> fromCurrency)
     const exchangeCurrencies = () => {
+        if (currency1 === null || currency2 === null) return
         const temp = currency1;
-        setCurrency2(currency1);
         setCurrency1(currency2);
+        setCurrency2(temp);
         setFavouriteStatus(getFavouriteStatus(currency1.value, currency2.value))
 
         const temp2 = fromCurrency;
@@ -134,6 +162,8 @@ function Convert(){
         setToCurrency(temp2);
     }
 
+    // whenever amount is changed, get the latest exchange rate and set toCurrency accordingly
+    // debounces the input by 500ms
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (fromCurrency === "") {
@@ -141,12 +171,13 @@ function Convert(){
                 return
             }
             axios.get(`${BASE}/${currency1.value}/${currency2.value}`)
-            .then(res => setToCurrency(fromCurrency * res.data.conversion_rate))
+            .then(res => setToCurrency((fromCurrency * res.data.conversion_rate).toFixed(2)))
             .catch(err => console.log(err))
         }, 500)
         return () => clearTimeout(timeout)
     }, [fromCurrency])
 
+    // whenever currencies are changed, save it to the historyData array on the top (index 0) and save it to localStorage
     useEffect(() => {
         if (currency1 === null || currency2 === null){
             return
@@ -171,6 +202,7 @@ function Convert(){
         localStorage.setItem("history", JSON.stringify(historyData))
     }, [currency1, currency2])
 
+    // whenever currencies are exchanged, check if the pair is favourite and set favourite status accordingly
     useEffect(() => {
         if (currency1 === null || currency2 === null){
             return
@@ -183,6 +215,7 @@ function Convert(){
         setFavouriteStatus(getFavouriteStatus(currency1.value, currency2.value))
     }, [currency1, currency2])
 
+    // whenever favouriteStatus is changed, set favourites array to the most recently updated
     useEffect(() => {
         if (localStorage.getItem("favourites") === null){
             localStorage.setItem("favourites", JSON.stringify([]))
@@ -190,6 +223,7 @@ function Convert(){
         setFavouriteData(JSON.parse(localStorage.getItem("favourites")))
     }, [favouriteStatus])
 
+    // whenever currencies are exchanged, get the daily historical data for that pair for one month and set dataPoints
     useEffect(() => {
         if (currency1 === null || currency2 === null){
             return
@@ -213,6 +247,7 @@ function Convert(){
                 dataPoints_.push({x: new Date(key), y: res.data.rates[key][currency2.value]})
                 count = count + 1;
                 if (count === keys.length) {
+                    // when whole array is iterated through, set data points and graphReady to true
                     setDataPoints(dataPoints_)
                     console.log(dataPoints_)
                     setGraphReady(true)
@@ -221,6 +256,7 @@ function Convert(){
         }).catch(err => console.log(err))
     }, [currency1, currency2])
 
+    // when components load, get the history and favourites data
     useEffect(() => {
         if (localStorage.getItem("history") === null){
             localStorage.setItem("history", JSON.stringify([]))
@@ -252,7 +288,9 @@ function Convert(){
                                 control: (base, state) => ({
                                     ...base,
                                     boxShadow: "none",
-                                    border: state.isFocused ? "1px solid var(--primary-color)" : "1px solid hsl(0, 0, 80%)"
+                                    border: state.isFocused ? "1px solid var(--primary-color)" : "1px solid hsl(0, 0, 80%)",
+                                    width: "max-content",
+                                    minWidth: "100%"
                                 })
                             }}
                             getOptionLabel={ e => (
@@ -306,28 +344,31 @@ function Convert(){
                     </div>
                     <div></div>
                 </div>
-                { graphReady && <div className="convert-graph">
-                    <CanvasJSChart options={{
-                        width: 700,
-                        animationEnabled: true,
-                        title: {
-                            text: `${currency1.value} v/s ${currency2.value}`
-                        },
-                        axisX: {
-                            valueFormatString: "DD/MM/YYYY",
-                            lineColor: "rgb(36, 96, 155)",
-                            gridThickness: 0,
+                { /* if data is ready then show graph else nothing */ }
+                { graphReady && 
+                <div className="convert-graph-wrapper">
+                    <div className="convert-graph">
+                        <CanvasJSChart options={{
+                            animationEnabled: true,
+                            title: {
+                                text: `${currency1.value} v/s ${currency2.value}`
+                            },
+                            axisX: {
+                                valueFormatString: "DD/MM/YYYY",
+                                lineColor: "rgb(36, 96, 155)",
+                                gridThickness: 0,
 
-                        },
-                        axisY: {
-                            gridThickness: 0
-                        },
-                        data: [{
-                            xValueFormatString: "DD/MM/YYYY",
-                            type: "spline",
-                            dataPoints: dataPoints
-                        }]
-                    }} />
+                            },
+                            axisY: {
+                                gridThickness: 0
+                            },
+                            data: [{
+                                xValueFormatString: "DD/MM/YYYY",
+                                type: "spline",
+                                dataPoints: dataPoints
+                            }]
+                        }} />
+                    </div>
                 </div> }
             </div>
         </div>
