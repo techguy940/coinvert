@@ -2,7 +2,6 @@ import Select from "react-select";
 import { useState, useEffect } from "react";
 import '../styles/convert.css';
 import exchange from '../assets/transfer-1.png';
-import ReactCountryFlag from "react-country-flag";
 import Navbar from "./Navbar";
 import { sub, add } from "date-fns";
 import axios from "axios";
@@ -10,13 +9,11 @@ import CanvasJSReact from '@canvasjs/react-charts';
 import recent from '../assets/recent.png';
 import heart from '../assets/heart.png';
 import heartFilled from '../assets/heart-filled.png';
+import currencies from "./currencies.js";
 
 // initialise canvasjs
 var CanvasJS = CanvasJSReact.CanvasJS;
 var CanvasJSChart = CanvasJSReact.CanvasJSChart;
-
-// all supported currencies with their flags and name
-const currencies = [{"text": "USD", "value": "USD", "currencyName": "US Dollar", "icon": <ReactCountryFlag svg countryCode="US" />}, {"text": "INR", "value": "INR", "currencyName": "Indian Rupee", "icon": <ReactCountryFlag svg countryCode="IN" />}]
 
 // group styles for group labels 'History', 'Favourites' and 'Currencies' in select
 const groupBadgeStyles = {
