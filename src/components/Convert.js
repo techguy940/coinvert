@@ -172,7 +172,25 @@ function Convert(){
             }
             axios.get(`${BASE}/${currency1.value}/${currency2.value}`)
             .then(res => setToCurrency((fromCurrency * res.data.conversion_rate).toFixed(2)))
-            .catch(err => console.log(err))
+            .catch(err => {
+                var recentRates = localStorage.getItem("recentRates")
+                if (recentRates === null){
+                    recentRates = JSON.stringify([])
+                    localStorage.setItem("recentRates", recentRates)
+                }
+                recentRates = JSON.parse(recentRates)
+                var found = false;
+                recentRates.forEach(pair => {
+                    if (pair.from === currency1.value && pair.to === currency2.value){
+                        found = true;
+                        setToCurrency((fromCurrency * pair.value).toFixed(2))
+                        return
+                    }
+                })
+                if (!found){
+                    alert("Can not get the conversion rates. Please try again later")
+                }
+            })
         }, 500)
         return () => clearTimeout(timeout)
     }, [fromCurrency])

@@ -20,12 +20,21 @@ function Navbar(){
             if (marquee.length > 0){
                 marquee[0].style.display = "none"
             }
+            const convertInputs = Array.from(document.getElementsByClassName("convert-input"))
+            if (convertInputs.length > 0){
+                convertInputs.forEach(inp => inp.style.opacity = 0)
+            }
+            
         } else {
             setUlClass("");
             setMenuIcon(faBars);
             const marquee = Array.from(document.getElementsByClassName("rfm-marquee-container"));
             if (marquee.length > 0){
                 marquee[0].style.display = "flex"
+            }
+            const convertInputs = Array.from(document.getElementsByClassName("convert-input"))
+            if (convertInputs.length > 0){
+                convertInputs.forEach(inp => inp.style.opacity = 1)
             }
         }
     }
