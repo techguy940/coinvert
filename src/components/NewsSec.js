@@ -3,7 +3,7 @@ import parseDateAndFormat from '../utils/parse-date';
 import { useState } from 'react';
 import fallback from '../assets/fallback.jpg';
 
-// A single news component containing relevant image, title and the time of publishing, redirects to the website where it was posted when clicked
+// A single news component containing relevant image, title and the time of publishing, along with sentiments redirects to the website where it was posted when clicked
 function NewsSec(props){
     const [imgSrc, setImgSrc] = useState(props.imgUrl)
     const onError = () => setImgSrc(fallback)
