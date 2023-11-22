@@ -106,6 +106,17 @@
     color:gray;
 }
 
+.news-sec .news-sentiment
+{
+    font-weight: 400;
+    font-size: 14px;
+    color: gray;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
 @media (max-width: 780px)
 {
     .news-main

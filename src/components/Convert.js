@@ -94,7 +94,6 @@ function Convert(){
             favourites.forEach(cur => {
                 if (cur.from === currency1.value && cur.to === currency2.value){
                     favourites.splice(favourites.indexOf(cur), 1)
-                    console.log(favourites)
                     localStorage.setItem("favourites", JSON.stringify(favourites))
                     setFavouriteStatus(false)
                     return
@@ -264,7 +263,6 @@ function Convert(){
                 if (count === keys.length) {
                     // when whole array is iterated through, set data points and graphReady to true
                     setDataPoints(dataPoints_)
-                    console.log(dataPoints_)
                     setGraphReady(true)
                 }
             })

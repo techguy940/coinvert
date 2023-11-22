@@ -16,7 +16,7 @@ function News(){
     }
 
     // BASE api url for news along with its API KEY
-    const BASE = "https://newsapi.org/v2/everything";
+    const BASE = "https://eventregistry.org/api/v1/article/getArticles"
     const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
     // news array to store fetched news
@@ -57,22 +57,38 @@ function News(){
 
     // whenever the components load, fetch the latest news from API
     useEffect(() => {
-        axios.get(BASE, {
-            params: {
-                language: "en",
-                apiKey: API_KEY,
-                q: "forex"
-            }
+        axios.post(BASE, {
+            "action": "getArticles",
+            "keyword": "forex",
+            "articlesPage": 1,
+            "articlesCount": 100,
+            "articlesSortBy": "date",
+            "articlesSortByAsc": false,
+            "articlesArticleBodyLen": -1,
+            "resultType": "articles",
+            "lang": [
+                "eng"
+            ],
+            "ignoreKeyword": [
+                "IQ",
+                "Option",
+                "stock",
+                "stocks",
+                "Stock",
+                "Stocks"
+            ],
+            "dataType": [
+            "news",
+            "pr"
+            ],
+            "apiKey": API_KEY,
+            "forceMaxDataTimeWindow": 31
         }).then(res => {
             // set the pageCount variable
-            setPageCount(Math.ceil(res.data['articles'].length / PER_PAGE))
-            const _news = Array.from(res.data['articles'].map(article => {
-                return {"published": article['publishedAt'], "url": article["url"], "imgUrl": article["urlToImage"], "title": article["title"]}
-            }));
-            // sort the news by publishing date, newest first
-            _news.sort(function (a, b){
-                return Date.parse(b.published) - Date.parse(a.published)
-            })
+            setPageCount(Math.ceil(res.data.articles.results.length / PER_PAGE))
+            const _news = Array.from(res.data.articles.results.map(article => {
+                return {"published": article['dateTimePub'], "url": article['url'], "imgUrl": article['image'], "title": article['title'], "sentiment": article['sentiment'].toFixed(2)}
+            }))
             // set currentPageData as per currentPage
             setCurrentPageData(_news.slice(offset, offset + PER_PAGE))
             // set all news to `news` so no need to fetch everytime when user changes the page
@@ -108,7 +124,7 @@ function News(){
                 <div className="news">
                     { /* map each element from currentPageData to be a <NewsSec /> component */ }
                     {currentPageData.map(article => {
-                        return <NewsSec url={article.url} imgUrl={article.imgUrl} title={article.title} published={article.published} />
+                        return <NewsSec url={article.url} imgUrl={article.imgUrl} title={article.title} published={article.published} sentiment={article.sentiment} />
                     })}
                 </div>
                 { /* if the news is loaded show pagination else nothing */}
