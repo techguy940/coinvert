@@ -22,7 +22,7 @@ function Navbar(){
             }
             const convertInputs = Array.from(document.getElementsByClassName("convert-input"))
             if (convertInputs.length > 0){
-                convertInputs.forEach(inp => inp.style.opacity = 0)
+                convertInputs.forEach(inp => inp.style.display = "none")
             }
             
         } else {
@@ -34,7 +34,7 @@ function Navbar(){
             }
             const convertInputs = Array.from(document.getElementsByClassName("convert-input"))
             if (convertInputs.length > 0){
-                convertInputs.forEach(inp => inp.style.opacity = 1)
+                convertInputs.forEach(inp => inp.style.display = "flex")
             }
         }
     }
