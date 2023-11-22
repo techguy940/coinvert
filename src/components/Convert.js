@@ -46,9 +46,9 @@ const formatGroupLabel = (data) => (
 // Main component for converting currencies
 function Convert(){
     // APIs and KEYs for current rate and historical rates
-    const API_KEY = "";
+    const API_KEY = process.env.REACT_APP_CONVERSION_API_KEY;
     const BASE = `https://v6.exchangerate-api.com/v6/${API_KEY}/pair`;
-    const HISTORIC_API_KEY = "";
+    const HISTORIC_API_KEY = process.env.REACT_APP_CHART_API_KEY;
     const HISTORIC_BASE = "https://api.forexrateapi.com/v1/timeframe";
 
     // currency1, currency2 keeps track of which currencies are selected to exchange

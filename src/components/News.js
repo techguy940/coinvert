@@ -17,7 +17,7 @@ function News(){
 
     // BASE api url for news along with its API KEY
     const BASE = "https://newsapi.org/v2/everything";
-    const API_KEY = "";
+    const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
     // news array to store fetched news
     const [news, setNews] = useState([]);

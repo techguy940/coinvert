@@ -5,7 +5,7 @@ import axios from "axios";
 import Marquee from "react-fast-marquee";
 
 function MarqueeCon(){
-    const API_KEY = "";
+    const API_KEY = process.env.REACT_APP_CONVERSION_API_KEY;
     const BASE = `https://v6.exchangerate-api.com/v6/${API_KEY}`;
     const [currencyData, setCurrencyData] = useState([])
     useEffect(() => {
