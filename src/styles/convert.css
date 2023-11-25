@@ -76,6 +76,20 @@
     animation: rotatefull 0.2s linear;
 }
 
+.convert-currency-rate
+{
+    display: flex;
+    padding-left: 11rem;
+    padding-right: 5rem;
+    margin-top: 1rem;
+}
+
+.convert-currency-rate p
+{
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
 @keyframes rotatefull {
     100% {
         transform: rotate(180deg);
@@ -192,6 +206,18 @@
     {
         flex-direction: column;
         gap: 0;
+    }
+
+    .convert-currency-rate
+    {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        justify-content: center;
+    }
+
+    .convert-currency-rate p
+    {
+        font-size: 1.25rem;
     }
 
     .convert-exchange

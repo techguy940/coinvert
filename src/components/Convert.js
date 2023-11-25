@@ -59,6 +59,9 @@ function Convert(){
     const [fromCurrency, setFromCurrency] = useState("")
     const [toCurrency, setToCurrency] = useState("")
 
+    // exchangeRate is the conversion rate of currency1 to currency2
+    const [exchangeRate, setExchangeRate] = useState(null)
+
     // dataPoints holds the historical data points for graph
     const [dataPoints, setDataPoints] = useState([])
 
@@ -167,7 +170,10 @@ function Convert(){
                 return
             }
             axios.get(`${BASE}/${currency1.value}/${currency2.value}`)
-            .then(res => setToCurrency((fromCurrency * res.data.conversion_rate).toFixed(2)))
+            .then(res => {
+                setExchangeRate(res.data.conversion_rate.toFixed(2))
+                setToCurrency((fromCurrency * res.data.conversion_rate).toFixed(2))
+            })
             .catch(err => {
                 var recentRates = localStorage.getItem("recentRates")
                 if (recentRates === null){
@@ -180,6 +186,7 @@ function Convert(){
                     if (pair.from === currency1.value && pair.to === currency2.value){
                         found = true;
                         setToCurrency((fromCurrency * pair.value).toFixed(2))
+                        setExchangeRate(pair.value);
                         return
                     }
                 })
@@ -347,6 +354,11 @@ function Convert(){
                         <img src={favouriteStatus ? heartFilled : heart} width="30" height="30"/>
                     </div>
                 </div>
+                { currency1 != null && currency2 != null
+                ? (<div className="convert-currency-rate">
+                    <p className="currency-rate">1 {currency1.value} = {exchangeRate} {currency2.value}</p>
+                </div>)
+                : "" }
                 <div className="convert-currency-inputs">
                     <div className="convert-currency-input">
                         <input type="number" min="0" placeholder={currency1?.value} value={fromCurrency} onChange={(e) => setFromCurrency(e.target.value)} disabled={currency1 === null || currency2 === null}/>
