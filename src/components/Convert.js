@@ -167,8 +167,10 @@ function Convert(){
         const timeout = setTimeout(() => {
             if (fromCurrency === "") {
                 setToCurrency("")
+                setExchangeRate(null)
                 return
             }
+            setExchangeRate(null)
             axios.get(`${BASE}/${currency1.value}/${currency2.value}`)
             .then(res => {
                 setExchangeRate(res.data.conversion_rate.toFixed(2))
@@ -354,7 +356,7 @@ function Convert(){
                         <img src={favouriteStatus ? heartFilled : heart} width="30" height="30"/>
                     </div>
                 </div>
-                { currency1 != null && currency2 != null
+                { currency1 != null && currency2 != null && exchangeRate != null
                 ? (<div className="convert-currency-rate">
                     <p className="currency-rate">1 {currency1.value} = {exchangeRate} {currency2.value}</p>
                 </div>)

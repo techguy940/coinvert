@@ -24,6 +24,11 @@ function Navbar(){
             if (convertInputs.length > 0){
                 convertInputs.forEach(inp => inp.style.display = "none")
             }
+
+            const convertMobile = Array.from(document.getElementsByClassName("convert-mobile"));
+            if (convertMobile.length > 0){
+                convertMobile[0].style.display = "none"
+            }
             
         } else {
             setUlClass("");
@@ -35,6 +40,10 @@ function Navbar(){
             const convertInputs = Array.from(document.getElementsByClassName("convert-input"))
             if (convertInputs.length > 0){
                 convertInputs.forEach(inp => inp.style.display = "flex")
+            }
+            const convertMobile = Array.from(document.getElementsByClassName("convert-mobile"));
+            if (convertMobile.length > 0){
+                convertMobile[0].style.display = "flex"
             }
         }
     }
